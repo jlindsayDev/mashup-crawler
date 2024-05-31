@@ -13,6 +13,7 @@ DB_FILE = 'crawled_urls.db'
 ZIP_DIR = 'zips/'
 ARCHIVE_TYPES = tuple(['.zip', '.7z', '.rar', '(Full%20Mix).mp3'])
 NON_ARCHIVAL_LINKS = ['Name', 'Last modified', 'Date', 'Size', 'Description']
+SLEEP_TIME_MS = 100
 
 
 def xml_tag_name(tag):
@@ -23,7 +24,7 @@ def xml_tag_name(tag):
 def request_url(url, cur):
   response = requests.get(url)
   print(f'[{response.status_code}] {response.url}')
-  time.sleep(0.25)
+  time.sleep(SLEEP_TIME_MS / 1000)
 
   if 'text/xml' in response.headers['Content-Type']:
     nodes = []
